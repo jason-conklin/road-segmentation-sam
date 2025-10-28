@@ -1,0 +1,37 @@
+task: "roads"
+
+model:
+  sam_checkpoint_path: "checkpoints/sam_vit_b_01ec64.pth"  # or your file
+  sam_model_type: "vit_b"                                  # vit_b | vit_l | vit_h
+task: "roads"
+io:
+  input_image: "demo/sample_data/example_tile.tif"
+  output_mask: "outputs/roads_mask.png"
+  output_overlay: "outputs/roads_overlay.png"
+
+postprocess:
+  mode: "roads"
+  min_area: 150
+  max_area: 300000
+  close_kernel: 5
+  open_kernel: 3
+  skeletonize: false
+  thicken: 3
+
+viz:
+  overlay_alpha: 0.45
+  overlay_color: [255, 50, 50]
+
+io:
+  input_image: demo/sample_data/example_tile.tif
+  output_mask: outputs/roads_mask.png
+  output_overlay: outputs/roads_overlay.png
+
+inference:
+  use_automatic_mask_generator: true
+  points_per_side: 32
+  pred_iou_thresh: 0.88
+  stability_score_thresh: 0.92
+  crop_n_layers: 1
+  crop_n_points_downscale_factor: 2
+  min_mask_region_area: 1000

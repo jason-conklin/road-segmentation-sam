@@ -1,0 +1,16 @@
+﻿.venv/
+__pycache__/
+*.log
+
+# model/data artifacts
+checkpoints/
+outputs/
+demo/sample_data/
+*.tif
+*.tiff
+*.pt
+*.pth
+*.h5
+*.zip
+*.tar
+*.7z

@@ -1,0 +1,38 @@
+task: "roads"
+
+model:
+  # Update to point at your downloaded SAM checkpoint.
+  sam_checkpoint_path: "/path/to/sam_vit_h_4b8939.pth"
+  # Optional: change to vit_l or vit_b if you have different checkpoints.
+  sam_model_type: "vit_h"
+  # Pin device if you know you have GPU support ("cuda" or "cpu").
+  device: null
+
+postprocess:
+  mode: "roads"           # "none" | "roads"
+  min_area: 150           # remove small specks
+  max_area: 300000        # suppress overly large regions
+  close_kernel: 5         # connect broken lines
+  open_kernel: 3          # remove noise
+  skeletonize: false      # keep full-width ribbons by default
+  thicken: 3              # if skeletonize=true, dilate result
+
+viz:
+  overlay_alpha: 0.45
+  overlay_color: [255, 50, 50]  # red overlay
+
+io:
+  # Default demo paths live outside version control. Override as needed.
+  input_image: "demo/sample_data/example_tile.tif"
+  output_mask: "outputs/roads_mask.png"
+  output_overlay: "outputs/roads_overlay.png"
+
+inference:
+  use_automatic_mask_generator: true
+  # Automatic mask generator tuning knobs. Adjust to trade speed and fidelity.
+  points_per_side: 32
+  pred_iou_thresh: 0.88
+  stability_score_thresh: 0.92
+  crop_n_layers: 1
+  crop_n_points_downscale_factor: 2
+  min_mask_region_area: 1000

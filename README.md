@@ -1,4 +1,6 @@
 # Road Segmentation from Satellite Imagery (SAM + heuristics)
+<img width="256" height="256" alt="satellite" src="https://github.com/user-attachments/assets/28156053-b433-4fca-aaf8-a814a0e94a0f" />
+<img width="256" height="256" alt="satellite_mask" src="https://github.com/user-attachments/assets/5263d9c5-62dd-4379-b730-dcdbf4ae973a" />
 
 This project wires the Segment Anything Model (SAM) into a lightweight pipeline that turns a satellite tile into a road mask. It bundles a CLI, a Shiny for Python demo, and a reproducible notebook that mirror the workflow used during the research spikes.
 
